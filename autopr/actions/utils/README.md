@@ -3,25 +3,25 @@
 <!-- Living README Summary -->
 ## 🌳 Living Summary
 
-This folder contains two files. The `__init__.py` file is empty. The `prompt_context.py` file is a Python module that handles prompt context and configuration transformation. It defines classes and functions related to prompt context entries, prompt context, and prompt context configuration. The file also includes utility functions for calculating string lengths and imports external libraries. Overall, this folder is part of a larger codebase and is responsible for managing prompt context and its configuration.
+This folder contains a file called `prompt_context.py` which implements a prompt context model and its configuration representation. The purpose of this file is to provide a structured representation of prompt context and its configuration for use in an automated prompt generation system. The file includes classes for mapping context variables, transforming configurations, and utility functions for string manipulation.
 
 
 ### `__init__.py`
 
-📄 The file is empty.
+📄 This file is empty.
 
 
 ### `prompt_context.py`
 
-📄 This file contains a Python module with several classes and functions. 
-🔍 It appears to be related to prompt context handling and configuration transformation.
-🔧 The file defines classes for prompt context entries, prompt context, and prompt context configuration.
-🖋️ The prompt context classes provide methods for formatting the context as a string and resolving template strings.
-📝 The prompt context configuration classes define different types of declarations for prompt context variables.
-⚙️ The file also includes a method for transforming the prompt context configuration into a prompt context object.
-🔢 There are some utility functions for calculating the token length of a string.
-🔀 The file imports various modules and types from external libraries.
-📚 The file includes type hints and annotations for better code readability.
-💡 Overall, this file is part of a larger codebase and is responsible for managing prompt context and its configuration.
+📄 This file contains the implementation of a prompt context model and its configuration representation.
+🔢 The `PromptContext` class represents a dictionary mapping heading strings to context variable values.
+🔤 It overrides the `__str__` method to format the context in a prompt-friendly way.
+📝 The `PromptContextInConfig` class represents the configuration representation of the prompt context.
+📝 It contains subclasses for different types of variable declarations in the context.
+🔄 The `PromptContextInConfig` class also provides a transformation method to convert the configuration into an instance of `PromptContext`.
+✨ The `PromptContextEntry` class represents a single entry in the context heading dictionary.
+📚 The file also includes some utility functions related to string token length and template rendering.
+🔒 The models in the file are defined using the Pydantic library for data validation and parsing.
+🔧 The purpose of this file is to provide a structured representation of prompt context and its configuration for use in an automated prompt generation system.
 
 <!-- Living README Summary -->

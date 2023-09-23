@@ -3,155 +3,156 @@
 <!-- Living README Summary -->
 ## 🌳 Living Summary
 
-This folder contains various files and modules that define actions and utilities for different tasks. These actions include dynamically importing modules, performing actions in an autonomous agent system, running bash commands, publishing comments on GitHub issues, committing and pushing changes to a remote repository, crawling folders and filtering files, inserting content into a text string, generating prompts using OpenAI's GPT-3 language model, reading file contents, setting the title of an issue, and writing content into a file. The files provide reusable code for automating these tasks and can be used in larger projects or workflows.
+This folder contains a collection of Python files that implement various actions for an automation framework. These actions include tasks such as running bash commands, publishing comments on GitHub issues, committing and pushing changes to a remote repository, crawling folders to list their contents, inserting content into text at specified delimiters, generating strings using OpenAI's GPT-3 model, reading file contents, setting the title of an issue, and writing content into a file. The files use libraries such as Pydantic for input validation and modeling, and they are well-documented with comments and type hints.
 
 
 ### `__init__.py`
 
-📂 This file is used to dynamically import all modules in its directory.  
-📝 It retrieves the file and directory names using the `glob` module.  
-🔍 It filters out the files and directories that are not Python modules.  
-📚 It creates a list of module names by removing the file extensions.  
-📁 It also includes the names of directories with an `__init__.py` file.  
-🔀 The `__all__` variable is set to include all the module and directory names.  
-🔗 The `from . import *` statement imports all the modules in this file's directory.  
-🙅‍♀️ The `pyright: ignore[reportUnsupportedDunderAll]` comment suppresses an error message.  
-📑 The purpose of this file is to provide a convenient way to import all modules in its directory.  
-📌 It allows for easy organization and modularization of code.
+📁 The file imports modules and directories in the current directory.
+🔎 It collects the names of Python files and directories without '__init__.py' in the current directory.
+📚 The collected names are stored in '__all__' for potential usage.
+📂 The file also imports all modules from the current directory.
+🧩 It serves as a way to easily import all modules and directories in the current directory.
+
 
 
 ### `base.py`
 
-📄 This file defines a base class for actions in an autonomous agent system.
-🧩 Actions are responsible for performing a single task and returning a result.
-🔑 The file also includes a metaclass for registering actions in a global registry.
-🔧 The base action class provides a run method and initializes various services.
-📝 The file includes methods for getting the input and output types of an action.
-📚 There is a function that returns a dictionary of registered actions.
-
+📝 This file defines a base class for actions used in an autonomous agent. Actions are responsible for performing a single task, affecting the environment, and returning a result. 
+🔒 The file also includes a metaclass for registering actions in a global registry.
+🔑 The base class includes attributes for the ID, name, and description of an action.
+🏃‍♂️ The base class has a `run` method that needs to be implemented by subclasses to execute the action.
+🔧 The base class also has an initialization method that sets up various services and dependencies for the action.
+📜 The file defines two type variables, `Inputs` and `Outputs`, which are used to specify the input and output types of an action.
+📁 The file includes a function that returns a dictionary of all registered actions.
+⚠️ The file has some error handling for duplicate action IDs and missing input/output type arguments.
+🔍 The file imports various modules and types used by the action classes.
+📚 The file includes some documentation and comments to explain the purpose and usage of the code.
 
 
 ### `bash.py`
 
-📝 This file is a Python script that defines a class called `Bash` which is an implementation of an action. 
-🔧 The purpose of the `Bash` action is to run a bash command and return its output. 
-🔌 The action takes a command as an input and returns the standard output and standard error as outputs. 
-🔍 The file also defines input and output models for the `Bash` action. 
-🔬 The `Bash` action is executed when the file is run as a standalone script. 
-🚀 The script uses the `asyncio` library to run the action asynchronously. 
-⚙️ The `run` method of the `Bash` class uses the `asyncio.create_subprocess_shell` function to run the bash command. 
-📥 The standard output and standard error streams are captured using the `communicate` method of the subprocess object. 
-📤 The output values are then returned as an instance of the `BashOutputs` class. 
-📌 The file also includes a test that manually runs the `Bash` action with a sample command.
+📄 This file defines a class called "Bash" that is responsible for running a bash command and returning its output.
+🎯 The purpose of this file is to provide a reusable action that can be used in an automation framework.
+⚙️ The "Bash" class takes a command as input and uses asyncio to run the command in a subprocess.
+📥 The input command is specified through the "BashInputs" class.
+📤 The output of the command is captured and returned as a string through the "BashOutputs" class.
+🔀 The file also includes a main block that demonstrates how to manually run the "Bash" action with a sample input.
+📝 The file uses the pydantic library for input and output validation.
+🧪 The file imports a utility function called "run_action_manually" for testing purposes.
+🔗 The "Bash" class extends a base class called "Action" which provides a generic structure for actions in the automation framework.
 
 
 ### `comment.py`
 
-📄 This file contains a class called `Comment` that represents an action to publish a comment on a GitHub issue.
-🔑 The class has an `id` attribute set to "comment".
-📝 The class has a `run` method that takes inputs of type `Inputs` and returns `None`.
-📥 The `Inputs` class is a Pydantic model that defines the expected inputs for the `Comment` action.
-🗒️ The `Inputs` class has two attributes: `comment` (a required string) and `issue_number` (an optional integer).
-🔀 The `issue_number` attribute has a default value of `None`.
-💻 The `run` method calls a `publish_comment` method from a `publish_service` to publish the comment on the GitHub issue.
-📥 The `publish_comment` method takes the comment and issue number as inputs.
-📚 The file imports necessary modules and inherits from a base `Action` class.
-🌟 The file is part of a larger codebase for automating actions on GitHub issues.
+📄 The file contains a class `Comment` that represents an action to publish a comment on a GitHub issue.
+📝 The class has an `id` attribute that identifies it as the "comment" action.
+🔗 The class has a `run` method that takes inputs and publishes the comment using a publish service.
+🔧 The inputs for the `run` method include a comment string and an optional issue number.
+📦 The class imports necessary modules and uses a base class for the action.
+🔄 The `run` method is async and awaits the publishing of the comment.
+💡 The file uses Pydantic for input validation and type checking.
+📚 The purpose of the file is to provide functionality for publishing comments on GitHub issues.
+⚙️ The file can be used as a part of a larger automation system or workflow.
+💬 The file can be extended or customized to add more actions related to GitHub issues.
 
 
 ### `commit_and_push.py`
 
-📄 The file contains a class named "CommitAndPush" which represents an action to commit and push changes to a remote repository.
-🔑 The class has an ID attribute assigned as "commit_and_push".
-🔀 The class inherits from a base class named "Action" and specifies the generic type "Inputs" for input parameters and "None" for output.
-🔧 The class has an async method named "run" which takes an instance of "Inputs" as input and returns None.
-📌 The "run" method calls the "commit" method of a "commit_service" object, passing the commit message, filepaths, and a push flag.
-📝 The default commit message is set to "AutoPR commit".
-📂 The "filepaths" attribute of "Inputs" is an optional list of strings.
-⚙️ The file uses the "pydantic" library for input validation.
-🔍 The file imports necessary modules and packages.
-💡 The purpose of the file is to define and implement the logic for committing and pushing changes to a remote repository.
+📄 This file defines a class called "CommitAndPush"   
+📝 The purpose of this class is to commit and push changes to a remote repository   
+🔒 It inherits from the "Action" class   
+🎯 The "run" method is used to execute the commit and push action   
+📝 The "run" method takes an "Inputs" object as input   
+✏️ The "Inputs" object defines the commit message and optional filepaths   
+🔑 The class has a unique identifier called "id"   
+💻 The "commit_service" object is used to perform the commit and push   
+🔒 The "run" method is asynchronous   
+🤖 The default commit message is "AutoPR commit"
 
 
 ### `crawl_folder.py`
 
-📄 This file contains code for crawling a folder and listing its files and subfolders. 
-🔍 It excludes certain files and directories based on predefined patterns.
-🧪 The code includes a class `CrawlFolder` which is an action that can be run manually.
-📥 The action takes inputs such as the folder path, files and subfolders to ignore, and whether to ignore binary files.
-✅ It returns the list of file entries in the specified folder after applying the exclusion criteria.
-⚠️ The exclusion criteria include patterns for files and directories that are considered non-informative.
-🔧 The code also includes a utility function `is_binary` to check if a file is binary.
-🔌 The code has some dependencies on external libraries such as `asyncio`, `re`, and `pydantic`.
-🔬 The file includes a test case that can be run if the file is executed directly.
-📝 Overall, this file provides a reusable action for crawling folders and filtering out certain files and directories.
+📄 This file defines a Python class called "CrawlFolder" that lists all the files and subfolders in a given folder, excluding certain files and directories.
+📂 The purpose of this class is to crawl a folder and provide a list of its contents, which can be useful for various file management tasks.
+🔍 It uses regular expressions to define patterns for files and directories that should be ignored during the crawl.
+🔧 The class has a method to check if a file is binary or not, and it can optionally ignore binary files based on a flag.
+📝 The class has input and output models defined using Pydantic, which specify the expected structure of the inputs and outputs.
+📚 The input model allows specifying files and subfolders to ignore during the crawl, as well as the folder path to crawl.
+💡 The class is designed to be used as an action in a larger system or application, as indicated by the inheritance from the "Action" base class.
+🔨 The "run" method of the class performs the actual crawl and returns the list of file entries that passed the exclusion criteria.
+⚙️ The code at the bottom of the file demonstrates how to manually run the "CrawlFolder" action using the provided inputs.
 
 
 ### `insert_content_into_text.py`
 
-📝 This file contains a Python class called `InsertContentIntoText` that is an implementation of a specific action. 
-🔍 The purpose of this action is to insert content into a string at a specified delimiter. 
-🔧 It is designed to handle cases where the delimiter occurs only once or multiple times in the string. 
-📥 The inputs to this action include the existing content of the string, the delimiter, and the content to be inserted. 
-💼 The output of this action is the updated content of the string after the insertion. 
-🧪 The file includes two examples of how to use this action, one with no delimiters and one with two delimiters. 
-🔬 The `run` method of the `InsertContentIntoText` class is responsible for executing the action. 
-⚙️ The `insert_tag_content_into_string` method is a helper function used by the action to perform the insertion. 
-📚 The file also imports necessary modules and defines some data models for input and output structures. 
-🧪 Lastly, the file includes a test setup to manually run the action and validate its functionality.
+📄 This file contains a Python script that defines a class called `InsertContentIntoText`.
+🔍 The purpose of this class is to insert content into a string at a specified delimiter.
+🧩 The class has a method called `insert_tag_content_into_string` which performs the insertion logic.
+🔧 The class also has a `run` method that takes inputs, calls the insertion method, and returns the modified content.
+📝 The inputs include the existing content, delimiter, and the content to be inserted.
+📥 The `run` method returns the modified content as an output.
+⚙️ The file also includes an example usage of the `InsertContentIntoText` class.
+🚀 The example demonstrates how to insert content when there are no delimiters and when there are two delimiters.
+🔬 The file can be run directly to test the functionality of the class.
 
 
 ### `prompt.py`
 
-📝 This file contains code for generating a string using OpenAI's GPT-3 language model. 
-📦 It defines the `Inputs` and `Outputs` data models for the prompt generation process.
-🔍 The `trim_context` function trims the context entries to fit within the specified maximum token length.
-🔧 The `build_prompt_and_instructions` function constructs the prompt and instructions based on the provided inputs.
-📲 The `invoke_openai` function makes an API call to OpenAI to generate the string based on the prompt and instructions.
-💾 The generated string is cached to avoid making duplicate API calls.
-🏃 The `run` function orchestrates the prompt generation process, including cache retrieval and storing the result.
-🍎 The `if __name__ == "__main__"` block demonstrates an example usage of the `PromptString` action.
-🔬 The `run_action_manually` function is used to manually run the action with the provided inputs.
-🍉 The file serves as an entry point for generating prompt-based strings using OpenAI's GPT-3 model.
+📝 This file contains a Python script for generating a string using OpenAI's GPT-3 model.
+🔧 It defines a class called "PromptString" that implements the functionality.
+🔍 The class takes various inputs such as the model to use, prompt context, instructions, and prompt text.
+🧩 It provides a method to trim the prompt context to fit within a specified token limit.
+🔁 The class uses the Tenacity library for retrying API calls in case of errors.
+📥 The "run" method invokes the OpenAI API to generate the string based on the inputs.
+💾 The generated string is cached to avoid redundant API calls.
+📄 The file also includes a test case for manually running the action.
+🏃‍♀️ When executed as a standalone script, the test case is run using asyncio.
 
 
 ### `read_file.py`
 
-📝 This file contains a Python class called `ReadFile` that represents an action to read the contents of a file. 
-🔍 It has methods for loading Jupyter notebooks and ensuring file existence. 
-📄 The `run` method reads the contents of a file and returns them along with a success flag. 
-🔒 If specified, it can also ensure that the file exists before reading it. 
-📂 The file also includes a test case to manually run the action and remove the test file afterwards. 
-💡 The purpose of this file is to provide a reusable action for reading file contents in a Python project.
+📝 This file contains a Python class called "ReadFile" that represents an action to read the contents of a file. 
+🔍 It uses the "pydantic" library for data validation and modeling. 
+📂 The class has two nested classes called "Inputs" and "Outputs" that define the expected input and output data structures. 
+📚 The "load_jupyter_notebook" method is used to read the contents of a Jupyter Notebook file, while the "ensure_file_exists" method ensures that a file exists at the given path. 
+🔧 The "run" method is the main entry point of the class and it reads the contents of a file based on the provided inputs. 
+🚀 The file can be run directly to test the "ReadFile" action with a sample input. 
+💻 The file also includes an import statement and a conditional block for running the action manually. 
+❌ If an error occurs during file reading, an error message is logged and the exception is re-raised. 
+🧹 The file also includes a cleanup step to remove the temporary file created during testing.
 
 
 ### `set_issue_title.py`
 
-📝 This file defines a class named "SetIssueTitle" which is an action to set the title of an issue.
-🔑 The class extends a generic "Action" class and provides an implementation for the "run" method.
-🔗 The "run" method takes an instance of the "Inputs" class as input and sets the title of an issue using the provided value.
-💡 The "Inputs" class defines a single attribute named "title" of type string.
-🧩 The "SetIssueTitle" class has a class variable named "id" which can be used to identify this specific action.
-📚 The class uses the "pydantic" library for data validation and modeling.
-🔧 The "run" method is asynchronous and calls a method named "set_title" on a "publish_service" object.
-🙌 The purpose of this file is to provide a reusable action to set the title of an issue, which can be used in an automated workflow or system.
-⚙️ This file may be part of a larger project or library that implements various actions for managing issues.
+📄 This file contains a class called SetIssueTitle that represents an action to set the title of an issue.   
+🔧 The action is part of a larger system called autopr.   
+🔑 The action has an id of "set_issue_title".   
+📥 The action expects an input of type Inputs, which has a single attribute called title.   
+🏃‍♀️ The action's run method is asynchronous and sets the title using a publish_service.   
+💡 The file uses pydantic for input validation.   
+⚙️ The file imports the BaseModel class from pydantic and the Action class from autopr.actions.base.   
+📚 The purpose of this file is to define the behavior of the SetIssueTitle action.   
+🔧 The file is likely part of a larger codebase that includes other actions and functionality.   
+📝 The file is well-documented with comments and type hints.
 
 
 ### `utils`
 
-This folder contains two files. The `__init__.py` file is empty. The `prompt_context.py` file is a Python module that handles prompt context and configuration transformation. It defines classes and functions related to prompt context entries, prompt context, and prompt context configuration. The file also includes utility functions for calculating string lengths and imports external libraries. Overall, this folder is part of a larger codebase and is responsible for managing prompt context and its configuration.
+This folder contains a file called `prompt_context.py` which implements a prompt context model and its configuration representation. The purpose of this file is to provide a structured representation of prompt context and its configuration for use in an automated prompt generation system. The file includes classes for mapping context variables, transforming configurations, and utility functions for string manipulation.
 
 
 ### `write_into_file.py`
 
-💡 This file contains a Python script that defines an action called "WriteIntoFile".
-📝 The purpose of this action is to write content into a file.
-📁 The action takes three inputs: the filepath of the file, the content to insert, and a flag indicating whether to append the content at the end of the file or replace the entire file content.
-✍️ When the action is run, it opens the file and writes the content based on the provided inputs.
-✅ The action returns an output indicating whether the file was written to successfully.
-🔧 The action can be manually tested by running it with sample inputs.
-🚮 After running the action, the test file is removed.
-
+📝 This file contains a Python script that implements an action called "WriteIntoFile".
+🖋️ The purpose of this action is to write content into a file.
+📥 It takes inputs such as the filepath, content to insert, and whether to append or replace the file content.
+✏️ The action uses the "open" function to open the file in append or write mode, and writes the content into it.
+📤 It returns an output indicating whether the file was written to successfully.
+🧪 The script includes a test scenario where the action is manually run with sample inputs.
+🔒 The file is deleted after the test is completed.
+🔽 The action is defined as a subclass of the "Action" class from the "autopr.actions.base" module.
+🔧 The "pydantic" library is used for data validation using the "BaseModel" class.
+🔒 The script can be executed directly if it is the main module.
 
 <!-- Living README Summary -->

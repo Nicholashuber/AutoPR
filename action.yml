@@ -1,0 +1,24 @@
+name: 'Automatic Pull Request'
+description: 'Bring your codebase alive'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+branding:
+  icon: 'git-pull-request'
+  color: 'purple'
+inputs:
+  github_token:
+    description: 'GitHub token'
+    required: true
+  base_branch:
+    description: 'Base branch'
+    default: 'main'
+  loading_gif_url:
+    description: 'URL of the gif to display while the PR is being generated'
+    default: 'https://media0.giphy.com/media/l3nWhI38IWDofyDrW/giphy.gif'
+  target_branch_name_template:
+    description: 'Template for the name of the target branch'
+    default: 'autopr/{issue_number}'
+  overwrite_existing:
+    description: 'Whether to overwrite existing branches and pull requests when creating from issues'
+    default: 'false'

@@ -36,6 +36,8 @@ jobs:
       with:
         ref: main
         fetch-depth: 1
+    - name: Install Jinja2
+      run: pip install jinja2
     - name: AutoPR
       uses: irgolic/autopr@10e289162e546d7098ae5bf2df983a97eb4f0493
       env:

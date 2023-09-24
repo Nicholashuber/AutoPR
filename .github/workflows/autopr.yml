@@ -28,7 +28,7 @@ jobs:
           "https://api.github.com/repos/${{ github.repository }}/collaborators/${{ github.event.sender.login }}" | jq -r '.message')
 
         if [ "$is_collaborator" == "Not Found" ]; then
-          echo "Label not added by a collaborator. Skipping action."
+          echo "Label not added by a collaborator2. Skipping action."
           exit 78
         fi
     - name: Checkout
